@@ -14,7 +14,7 @@ const ColorPalette = () => {
 
     const fetchColors = async () => {
         try {
-            const response = await axios.get('http://localhost:7000/colors');
+            const response = await axios.get('color-api-blond.vercel.app/colors');
             setColors(response.data);
         } catch (error) {
             console.error('Error fetching colors:', error);
