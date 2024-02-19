@@ -25,7 +25,7 @@ const ColorPalette = () => {
         try {
             // Check if newColor starts with #
             const colorToAdd = newColor.startsWith('#') ? newColor : `#${newColor}`;
-            await axios.post('http://localhost:7000/colors', { color: colorToAdd }); // Send colorToAdd to the server
+            await axios.post('color-api-blond.vercel.app/colors', { color: colorToAdd }); // Send colorToAdd to the server
             fetchColors(); // Fetch updated colors after adding
             setNewColor(''); // Clear input after adding
             toast.success("Color added successfully!"); // Show toast notification
