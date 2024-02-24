@@ -80,7 +80,7 @@ const ColorPalette = () => {
             const colorToUpdate = editColorValue.startsWith('#') ? editColorValue : `#${editColorValue}`;
             console.log('Updating Color:', colorToUpdate);
     
-            const response = await axios.put(`http://localhost:7000/colors/${editingColor._id}`, {
+            const response = await axios.put(`https://color-api-xgao.onrender.com/colors/${editingColor._id}`, {
                 color: colorToUpdate,
                 name: colorName,
                 category: colorCategory,
