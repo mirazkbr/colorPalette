@@ -115,7 +115,7 @@ const ColorPalette = () => {
     const undoDelete = async () => {
         try {
             if (deletedColor) {
-                await axios.post('http://localhost:7000/colors', deletedColor);
+                await axios.post('https://color-api-xgao.onrender.com/colors', deletedColor);
                 fetchColors();
                 setDeletedColor(null);
             }
