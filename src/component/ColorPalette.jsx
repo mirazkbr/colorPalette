@@ -14,7 +14,7 @@ const ColorPalette = () => {
 
     const fetchColors = async () => {
         try {
-            const response = await axios.get('color-api-blond.vercel.app/colors');
+            const response = await axios.get('https://color-api-xgao.onrender.com/mycolors');
             setColors(response.data);
         } catch (error) {
             console.error('Error fetching colors:', error);
@@ -25,7 +25,7 @@ const ColorPalette = () => {
         try {
             // Check if newColor starts with #
             const colorToAdd = newColor.startsWith('#') ? newColor : `#${newColor}`;
-            await axios.post('color-api-blond.vercel.app/colors', { color: colorToAdd }); // Send colorToAdd to the server
+            await axios.post('https://color-api-xgao.onrender.com/colors', { color: colorToAdd }); // Send colorToAdd to the server
             fetchColors(); // Fetch updated colors after adding
             setNewColor(''); // Clear input after adding
             toast.success("Color added successfully!"); // Show toast notification
