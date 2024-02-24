@@ -105,7 +105,7 @@ const ColorPalette = () => {
         try {
             const deletedColor = colors.find((color) => color._id === colorId);
             setDeletedColor(deletedColor);
-            await axios.delete(`http://localhost:7000/colors/${colorId}`);
+            await axios.delete(`https://color-api-xgao.onrender.com/colors/${colorId}`);
             fetchColors();
         } catch (error) {
             handleError(error);
