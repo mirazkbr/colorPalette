@@ -181,7 +181,7 @@ const ColorPalette = () => {
                                     cursor: "pointer"
                                 }}
                             />
-                            <AiOutlineDelete
+                            <TbHttpDelete
                                 onClick={() => deleteColor(color._id)} // Use AiOutlineDelete for delete functionality
                                 style={{
                                     color: `black`,
