@@ -45,16 +45,11 @@ const ColorPalette = () => {
         }
     };
 
-    const editColor = async (colorId) => {
-        try {
-            const editedColor = colors.find((color) => color._id === colorId);
-            setEditingColor(editedColor);
-            setEditColorValue(editedColor.color);
-            setColorName(editedColor.name || '');
-            setColorCategory(editedColor.category || '');
-        } catch (error) {
-            handleError(error);
-        }
+    const editColor = (color) => {
+        setEditingColor(color);
+        setEditColorValue(color.color);
+        setColorName(color.name || '');
+        setColorCategory(color.category || '');
     };
 
     const updateColor = async () => {
@@ -65,7 +60,6 @@ const ColorPalette = () => {
                 name: colorName,
                 category: colorCategory,
             });
-
             fetchColors();
             setNewColor('');
             setColorName('');
@@ -177,7 +171,7 @@ const ColorPalette = () => {
                         </p>
                         <div className="edit-button" style={{ position: 'absolute', top: "0", right: "0", fontSize: "20px" }}>
                             <AiFillEdit
-                                onClick={() => editColor(color._id)}
+                                onClick={() => editColor(color)}
                                 style={{
                                     color: `black`,
                                     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
