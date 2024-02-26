@@ -20,7 +20,7 @@ const ColorPalette = () => {
 
     const fetchColors = async () => {
         try {
-            const response = await axios.get('https://color-api-xgao.onrender.com/mycolors?sortByCategory=true');
+            const response = await axios.get('https://color-api-xgao.onrender.com/colors?sortByCategory=true');
             setColors(response.data);
         } catch (error) {
             handleError(error);
