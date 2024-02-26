@@ -174,7 +174,7 @@ const ColorPalette = () => {
                         {/* ... (existing code) */}
                         <div className="edit-button" style={{ position: 'absolute', top: "0", right: "0", fontSize: "20px" }}>
                             <AiFillEdit
-                                onClick={() => editColor(color._id)}
+                                onClick={() => editColor(color.id)}
                                 style={{
                                     color: `black`,
                                     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
@@ -182,7 +182,7 @@ const ColorPalette = () => {
                                 }}
                             />
                             <TbHttpDelete
-                                onClick={() => deleteColor(color._id)} // Use AiOutlineDelete for delete functionality
+                                onClick={() => deleteColor(color.id)} // Use AiOutlineDelete for delete functionality
                                 style={{
                                     color: `black`,
                                     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
