@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './color.css';
 import axios from 'axios';
-import { AiFillEdit } from "react-icons/ai";
-import { TbHttpDelete } from "react-icons/tb";
+import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import { FcUndo } from "react-icons/fc";
 
 const ColorPalette = () => {
@@ -28,22 +27,8 @@ const ColorPalette = () => {
         }
     };
 
-    // const isValidColorCode = (colorCode) => {
-    //     // Regular expression for valid color code (hexadecimal format)
-    //     const colorCodeRegex = /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
-    //     // Test the color code against the regular expression
-    //     return colorCodeRegex.test(colorCode);
-    // };
-
     const addColor = async () => {
         try {
-            // Check if newColor is a valid color code
-            // if (!isValidColorCode(newColor)) {
-            //     // Handle invalid color code (notify user, etc.)
-            //     console.error('Invalid color code');
-            //     return;
-            // }
-
             const colorToAdd = newColor.startsWith('#') ? newColor : `#${newColor}`;
             await axios.post('https://color-api-xgao.onrender.com/colors', {
                 color: colorToAdd,
@@ -60,7 +45,6 @@ const ColorPalette = () => {
         }
     };
 
-
     const editColor = async (colorId) => {
         try {
             const editedColor = colors.find((color) => color._id === colorId);
@@ -75,18 +59,13 @@ const ColorPalette = () => {
 
     const updateColor = async () => {
         try {
-            console.log('Editing Color ID:', editingColor._id);
-            
             const colorToUpdate = editColorValue.startsWith('#') ? editColorValue : `#${editColorValue}`;
-            console.log('Updating Color:', colorToUpdate);
-    
             const response = await axios.put(`https://color-api-xgao.onrender.com/colors/${editingColor._id}`, {
                 color: colorToUpdate,
                 name: colorName,
                 category: colorCategory,
             });
-    
-            console.log('Update Response:', response.data);
+
             fetchColors();
             setNewColor('');
             setColorName('');
@@ -95,11 +74,9 @@ const ColorPalette = () => {
             setEditColorValue('');
             setCopiedColor('');
         } catch (error) {
-            console.error('Error updating color:', error);
             handleError(error);
         }
     };
-    
 
     const deleteColor = async (colorId) => {
         try {
@@ -171,18 +148,44 @@ const ColorPalette = () => {
             <div className='color-container'>
                 {colors.map((color, index) => (
                     <div className="colorBox" key={index} style={{ backgroundColor: color.color, position: 'relative' }}>
-                        {/* ... (existing code) */}
+                        <p
+                            className="color-name"
+                            style={{
+                                textAlign: 'center',
+                                color: colors.some(c => c.color === newColor) ? 'red' : 'black',
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                            }}
+                        >
+                            {color.name}
+                        </p>
+                        <p
+                            className="color-code"
+                            style={{
+                                textAlign: 'center',
+                                color: colors.some(c => c.color === newColor) ? 'red' : 'black',
+                                position: 'absolute',
+                                bottom: '5px',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                fontSize: '12px',
+                            }}
+                        >
+                            {color.color}
+                        </p>
                         <div className="edit-button" style={{ position: 'absolute', top: "0", right: "0", fontSize: "20px" }}>
                             <AiFillEdit
-                                onClick={() => editColor(color.id)}
+                                onClick={() => editColor(color._id)}
                                 style={{
                                     color: `black`,
                                     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
                                     cursor: "pointer"
                                 }}
                             />
-                            <TbHttpDelete
-                                onClick={() => deleteColor(color.id)} // Use AiOutlineDelete for delete functionality
+                            <AiOutlineDelete
+                                onClick={() => deleteColor(color._id)}
                                 style={{
                                     color: `black`,
                                     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
