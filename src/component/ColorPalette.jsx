@@ -64,7 +64,7 @@ const ColorPalette = () => {
             setNewColor('');
             setColorName('');
             setColorCategory('');
-            setEditingColor(null);
+            setEditingColor(null); // Reset editingColor state
             setEditColorValue('');
             setCopiedColor('');
         } catch (error) {
