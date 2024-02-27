@@ -53,35 +53,36 @@ const ColorPalette = () => {
     };
 
     const updateColor = async () => {
-        try {
-            const colorToUpdate = editColorValue.startsWith('#') ? editColorValue : `#${editColorValue}`;
-            const response = await axios.put(`https://color-api-xgao.onrender.com/colors/${editingColor._id}`, {
+    try {
+        const colorToUpdate = editColorValue.startsWith('#') ? editColorValue : `#${editColorValue}`;
+        const response = await axios.put(
+            `https://color-api-xgao.onrender.com/colors/${editingColor._id}`,
+            {
                 color: colorToUpdate,
                 name: colorName,
                 category: colorCategory,
-            });
-            fetchColors();
-            setNewColor('');
-            setColorName('');
-            setColorCategory('');
-            setEditingColor(null); // Reset editingColor state
-            setEditColorValue('');
-            setCopiedColor('');
-        } catch (error) {
-            handleError(error);
-        }
-    };
+            }
+        );
+        fetchColors();
+        setEditingColor(null); // Reset editingColor state
+        setEditColorValue('');
+        setCopiedColor('');
+    } catch (error) {
+        handleError(error);
+    }
+};
 
-    const deleteColor = async (colorId) => {
-        try {
-            const deletedColor = colors.find((color) => color._id === colorId);
-            setDeletedColor(deletedColor);
-            await axios.delete(`https://color-api-xgao.onrender.com/colors/${colorId}`);
-            fetchColors();
-        } catch (error) {
-            handleError(error);
-        }
-    };
+
+    const deleteColor = async (color) => {
+    try {
+        setDeletedColor(color);
+        await axios.delete(`https://color-api-xgao.onrender.com/colors/${color._id}`);
+        fetchColors();
+    } catch (error) {
+        handleError(error);
+    }
+};
+
 
     const undoDelete = async () => {
         try {
@@ -171,22 +172,24 @@ const ColorPalette = () => {
                         </p>
                         <div className="edit-button" style={{ position: 'absolute', top: "0", right: "0", fontSize: "20px" }}>
                             <AiFillEdit
-                                onClick={() => editColor(color)}
-                                style={{
-                                    color: `black`,
-                                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-                                    cursor: "pointer"
-                                }}
-                            />
-                            <AiOutlineDelete
-                                onClick={() => deleteColor(color._id)}
-                                style={{
-                                    color: `black`,
-                                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-                                    cursor: "pointer",
-                                    margin: "0 5px"
-                                }}
-                            />
+    onClick={() => editColor(color)}
+    style={{
+        color: `black`,
+        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        cursor: "pointer"
+    }}
+/>
+
+<AiOutlineDelete
+    onClick={() => deleteColor(color)}
+    style={{
+        color: `black`,
+        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        cursor: "pointer",
+        margin: "0 5px"
+    }}
+/>
+
                         </div>
                     </div>
                 ))}
